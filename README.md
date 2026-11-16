@@ -1,24 +1,24 @@
-# Argus Incident Commander
+# Panoptes Incident Commander
 
 **An evidence-backed incident intelligence agent.** Give it an emergency and it investigates the situation across applications, determines what is known and unknown, and coordinates the resulting intelligence across the response team.
 
 When a 911 call comes in, a dispatcher may need to search maps, web sources, internal records and communications tools before they have a complete picture. We built an agent that does that work — and, more importantly, one that tells you how much of it it actually established.
 
-**The dispatcher stays in control. Argus does not dispatch units. It prepares the intelligence a human needs to decide faster.**
+**The dispatcher stays in control. Panoptes does not dispatch units. It prepares the intelligence a human needs to decide faster.**
 
 ---
 
 ## Demo
 
-**Watch the full Argus Incident Commander demo:**
+**Watch the full Panoptes Incident Commander demo:**
 
 [**▶ Watch the 2-minute demo on YouTube**](https://youtu.be/O0qCljFcMg4)
 
-The demo begins with a simulated 911 call and follows the incident through the Argus agent loop:
+The demo begins with a simulated 911 call and follows the incident through the Panoptes agent loop:
 
 **Observe → Investigate → Reason → Recommend**
 
-Argus receives the incident, identifies what needs to be established, investigates across live sources, constructs an evidence-backed incident picture, and delivers the resulting intelligence to the response team.
+Panoptes receives the incident, identifies what needs to be established, investigates across live sources, constructs an evidence-backed incident picture, and delivers the resulting intelligence to the response team.
 
 ### Screenshots
 
@@ -30,7 +30,7 @@ Argus receives the incident, identifies what needs to be established, investigat
 
 The console shows the incident as it develops, including sourced findings, unknowns, confidence, tool execution, and operational considerations.
 
-Every external claim is tied to the source that established it. Argus distinguishes between **REPORTED**, **VERIFIED**, **INFERRED**, **CONTRADICTED**, and **UNKNOWN** information.
+Every external claim is tied to the source that established it. Panoptes distinguishes between **REPORTED**, **VERIFIED**, **INFERRED**, **CONTRADICTED**, and **UNKNOWN** information.
 
 #### Response Team Coordination
 
@@ -40,13 +40,13 @@ Every external claim is tied to the source that established it. Argus distinguis
 
 <img width="914" height="671" alt="Screenshot 2026-09-13 at 5 08 21 PM" src="https://github.com/user-attachments/assets/a889e3c2-211e-4676-9a47-3adbb4034e7b" />
 
-Argus can turn the resulting incident picture into a responder-facing brief and coordinate it through connected communication tools.
+Panoptes can turn the resulting incident picture into a responder-facing brief and coordinate it through connected communication tools.
 
 ---
 
 ## It has a job, not a prompt
 
-Argus is not told which tools to call. It is given an incident and a schema of what must be determined for that kind of incident, and it works until the schema is satisfied or nothing more can help.
+Panoptes is not told which tools to call. It is given an incident and a schema of what must be determined for that kind of incident, and it works until the schema is satisfied or nothing more can help.
 
 ```text
 required for a fire:   location  building  occupancy  access  hazards
@@ -55,7 +55,7 @@ still unknown:         building, hazards, fire_station, hospital
 → runs osm.survey      because it closes four gaps at once
 ```
 
-Behaviour changes when the **schema** changes, not when a pipeline does. Adding `utility` to the gas schema makes Argus start investigating utility operators on gas calls, with no new control flow anywhere.
+Behaviour changes when the **schema** changes, not when a pipeline does. Adding `utility` to the gas schema makes Panoptes start investigating utility operators on gas calls, with no new control flow anywhere.
 
 ```bash
 ic serve          # the console, at http://127.0.0.1:8000
@@ -70,7 +70,7 @@ The console is the same agent: it posts the incident text and renders the result
   ✓ maps.geocode             322ms  Coterie, 1001, Van Ness Avenue, Western Addition…
   ✓ osm.survey                 1ms  storeys: 13; occupancy: social_facility; name: Coterie
   ✓ web.public_search        542ms  no public article specific to this address
-  ✓ ntfy.alert               412ms  delivered to ntfy.sh/argus-vIfi2FIYKqLvZzgo
+  ✓ ntfy.alert               412ms  delivered to ntfy.sh/Panoptes-vIfi2FIYKqLvZzgo
   ✓ slack.create_channel     286ms  #incident-ic-1847-1001-van-ness-avenue
   ✓ slack.post_message       310ms  brief posted to noctus-talk.slack.com/archives/…
 
@@ -122,7 +122,7 @@ Every field carries one of four states, and the difference between them is the p
 The run used to say `brief posted to #C0C1C6YDTDH` and stop there. That is true and useless: nobody watching can act on a channel id, and a message nobody can find is indistinguishable from one that was never sent. Every delivered action now comes back with a link you can open.
 
 ```text
-  ✓ ntfy.alert               delivered to ntfy.sh/argus-vIfi2FIYKqLvZzgo
+  ✓ ntfy.alert               delivered to ntfy.sh/Panoptes-vIfi2FIYKqLvZzgo
   ✓ slack.post_message       brief posted to
                              noctus-talk.slack.com/archives/C0C1C6YDTDH/p1789337416854919
 ```
@@ -206,7 +206,7 @@ The brief is visibly *constructed from evidence* rather than produced whole:
   ✓ osm.survey
     ↓  storeys: 13; occupancy: social_facility; name: Coterie
        sought: building, occupancy, hazards, fire_station
-  ARGUS SYNTHESIS
+  Panoptes SYNTHESIS
 ```
 
 Every arrow is a real tool call with a real latency and a real source.
@@ -270,16 +270,16 @@ The dispatch interval is regulated because it is already known to matter.
 * **Out-of-hospital cardiac arrest survival falls roughly 7–10% per minute** without defibrillation (Larsen et al., *Ann Emerg Med*, 1993).
 * **A furnished modern room can reach flashover in under five minutes** — UL's 2010 comparison of modern and legacy furnishings measured roughly an order-of-magnitude difference.
 
-These bound the problem. **None of them is evidence about Argus**, and we are not going to multiply one of them by a guess and call the product a life saved.
+These bound the problem. **None of them is evidence about Panoptes**, and we are not going to multiply one of them by a guess and call the product a life saved.
 
 ### Modelled — our arithmetic, with the inputs exposed
 
 The honest claim is narrower than the one a pitch deck would make.
 
-**Argus does not make a dispatcher faster at dispatching.** The call is still worked by a human on the standard clock. What changes is a *different* interval: the one in which the supplementary picture gets assembled — building height, occupancy, nearby hazards, wind direction, the nearest station and which side it arrives from, water supply. Today that picture is assembled over the radio en route, on arrival, or not at all.
+**Panoptes does not make a dispatcher faster at dispatching.** The call is still worked by a human on the standard clock. What changes is a *different* interval: the one in which the supplementary picture gets assembled — building height, occupancy, nearby hazards, wind direction, the nearest station and which side it arrives from, water supply. Today that picture is assembled over the radio en route, on arrival, or not at all.
 
 ```text
-                          today             with Argus
+                          today             with Panoptes
   building height         on arrival        before the first unit rolls
   upwind approach side    crew judgement    computed from live wind
   nearest mapped hydrant  on arrival        that, or an explicit "none mapped"
@@ -314,7 +314,7 @@ No API keys required — every fact-gathering source is keyless, and the brief i
 
 Set `SLACK_BOT_TOKEN` to deliver for real instead of rehearsing. Set `ANTHROPIC_API_KEY` or `GEMINI_API_KEY` and a model writes the two-sentence summary at the top of the brief, instead of the deterministic template.
 
-**The model is on a short leash, deliberately.** It never sees raw tool output and never gathers a fact — it is handed fields Argus has already established, with each field's state attached, and asked to restate them. Its output is then checked against those fields: every number and every distinctive name in the summary has to appear in the evidence, or the summary is discarded and the template is used. The check does not know which provider wrote the text, which is what made adding a second one safe rather than a second risk.
+**The model is on a short leash, deliberately.** It never sees raw tool output and never gathers a fact — it is handed fields Panoptes has already established, with each field's state attached, and asked to restate them. Its output is then checked against those fields: every number and every distinctive name in the summary has to appear in the evidence, or the summary is discarded and the template is used. The check does not know which provider wrote the text, which is what made adding a second one safe rather than a second risk.
 
 ```text
   summary.write    1273ms  gemini: A structure fire is reported on 105 Avenue
@@ -326,5 +326,5 @@ Note what survived the check: *"the caller reports"*. The model was given that f
 
 ## Where this sits
 
-Argus Incident Commander is one workflow: what happens in the minutes immediately after a call comes in. It is the first piece of **Argus, an intelligence layer for emergency response.**
+Panoptes Incident Commander is one workflow: what happens in the minutes immediately after a call comes in. It is the first piece of **Panoptes, an intelligence layer for emergency response.**
 
